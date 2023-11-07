@@ -7,22 +7,21 @@ const options = {
 	}
 };
 
-console.log("from News.js")
-async function weatherNews(){
-    const response = await fetch(url, options);
-try{ 
-   let newsData = await response.json();
-    console.log(newsData);
-	// console.log(newsData.articles)
-	const newsItem = newsData.articles;
-	console.log(newsItem)
-	
-	let output = "";
-	newsItem.map((item) => {
-		console.log(item)
+async function weatherNews() {
+	const response = await fetch(url, options);
+	try {
+		let newsData = await response.json();
+		console.log(newsData);
+		// console.log(newsData.articles)
+		const newsItem = newsData.articles;
+		console.log(newsItem)
 
-		// console.log(newsItem.articles)
-		 return output += ` 
+		let output = "";
+		newsItem.map((item) => {
+			console.log(item)
+
+			// console.log(newsItem.articles)
+			return output += ` 
 		<div class="colm">
 		  <div id="thumbnail">
 			  <img style="width:40px; margin-right:10px;" src="${item.thumbnail}"
@@ -34,15 +33,13 @@ try{
 			  </h5>
 			</div>
 		  </div>`
-	 
-	})
-	return output;
-	// document.querySelector("#news").innerHTML=output;
 
-}catch(error){
-	console.log(error);
-}
+		})
+		document.querySelector("#news").innerHTML = output;
+
+	} catch (error) {
+		console.log(error);
+	}
 
 };
-
-export default weatherNews();
+weatherNews();

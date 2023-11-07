@@ -1,7 +1,3 @@
-import {weatherNews} from './news.js'
-
-console.log("starts now")
-
 const apiKey = "208382e160738c4bd3319da71c3abe22";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=imperial&q=";
 
@@ -9,7 +5,6 @@ const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
 const weatherIcon = document.querySelector(".weather-icon")
 
-const weatherNewsBar=document.querySelector("#news");
 
 
 async function weatherNow(city) {
@@ -22,13 +17,15 @@ if(response.status== 404){
 } else{
 
     let data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     document.querySelector(".city").innerHTML = data.name +`, `+ data.sys.country;
     document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + ` °F`;
     document.querySelector(".feels").innerHTML=Math.round(data.main.feels_like)+`°F `;
     document.querySelector(".humidity").innerHTML = data.main.humidity + `% `;
     document.querySelector(".wind").innerHTML = data.wind.speed + ` mph `;
+
+
 
     if (data.weather[0].main == "Clouds") {
         weatherIcon.src = "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_2-512.png"
@@ -51,12 +48,8 @@ if(response.status== 404){
     }  
     document.querySelector(".weather").style.display="block";
     document.querySelector(".error").style.display="none";
-
 }
 }
 searchBtn.addEventListener("click", () => {
     weatherNow(searchBox.value);
 })
-
-weatherNewsBar.innerHTML=weatherNews;
-
